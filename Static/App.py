@@ -36,6 +36,7 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
+
 @app.route("/names")
 def names():
     """Return a list of sample names."""
@@ -49,7 +50,7 @@ def names():
 
 
 @app.route("/metadata/<sample>")
-def sample_metadata(sample):
+def sample_metadata(Sample):
     """Return the MetaData for a given sample."""
     sel = [
         Samples_Metadata.sample,
@@ -61,7 +62,7 @@ def sample_metadata(sample):
         Samples_Metadata.WFREQ,
     ]
 
-    results = db.session.query(*sel).filter(Samples_Metadata.sample == sample).all()
+    results = db.session.query(*sel).filter(Samples_Metadata.sample == Sample).all()
 
     # Create a dictionary entry for each row of metadata information
     sample_metadata = {}
